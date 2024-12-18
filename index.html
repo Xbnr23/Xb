@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة المشتركين</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة الاشتراكات</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
+    <h1>إدارة اشتراكات الصالة الرياضية</h1>
 
-    <div class="container">
-        <h1>إضافة مشترك جديد</h1>
-        <form id="subscriberForm">
-            <label for="firstName">الاسم الأول:</label>
-            <input type="text" id="firstName" required>
-
-            <label for="lastName">اللقب:</label>
-            <input type="text" id="lastName" required>
-
-            <label for="phone">رقم الهاتف:</label>
-            <input type="text" id="phone" required>
-
-            <label for="startDate">تاريخ بدء الاشتراك:</label>
-            <input type="date" id="startDate" required>
-
-            <label for="endDate">تاريخ نهاية الاشتراك:</label>
-            <input type="date" id="endDate" required>
-
-            <button type="submit">إضافة مشترك</button>
-        </form>
-
-        <h2>المشتركين الحاليين</h2>
-        <button id="filterExpired">فرز المشتركين المنتهية اشتراكاتهم</button>
-
-        <table id="subscribersTable">
-            <thead>
-                <tr>
-                    <th>الاسم الأول</th>
-                    <th>اللقب</th>
-                    <th>رقم الهاتف</th>
-                    <th>تاريخ البدء</th>
-                    <th>تاريخ الانتهاء</th>
-                    <th>حالة الاشتراك</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- قائمة المشتركين ستظهر هنا -->
-            </tbody>
-        </table>
+    <!-- إضافة مشترك -->
+    <div class="add-form">
+      <h2>إضافة مشترك جديد</h2>
+      <form id="subscriptionForm">
+        <input type="text" id="firstName" placeholder="الاسم" required>
+        <input type="text" id="lastName" placeholder="اللقب" required>
+        <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+        <input type="number" id="price" placeholder="السعر" required>
+        <input type="date" id="startDate" required>
+        <input type="date" id="endDate" required>
+        <button type="submit">إضافة</button>
+      </form>
     </div>
 
-    <script src="script.js"></script>
+    <!-- عرض الاشتراكات -->
+    <div class="subscriptions">
+      <h2>الاشتراكات المفعّلة</h2>
+      <div id="activeSubscriptions" class="subscription-list"></div>
+
+      <h2>الاشتراكات المنتهية</h2>
+      <div id="expiredSubscriptions" class="subscription-list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
