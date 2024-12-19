@@ -1,83 +1,75 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    text-align: center;
+  text-align: center;
+  color: #333;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+.add-form, .subscriptions {
+  margin: 20px 0;
 }
 
-label {
-    margin-top: 10px;
+form input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-input {
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+form button:hover {
+  background-color: #0056b3;
 }
 
-button:hover {
-    background-color: #45a049;
+.subscription-list {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.subscription-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  background-color: #fefefe;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.subscription-item p {
+  margin: 5px 0;
+  color: #333;
+  line-height: 1.5;
 }
 
-th, td {
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-button#filterExpired {
-    margin: 20px 0;
-    padding: 10px;
-    background-color: #FF6347;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button#filterExpired:hover {
-    background-color: #e55347;
+.subscription-item strong {
+  color: #007bff;
 }
