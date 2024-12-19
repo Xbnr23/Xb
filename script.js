@@ -1,49 +1,60 @@
-document.getElementById('subscriberForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // منع إعادة تحميل الصفحة
+const subscriptionForm = document.getElementById("subscriptionForm");
+const activeSubscriptions = document.getElementById("activeSubscriptions");
+const expiredSubscriptions = document.getElementById("expiredSubscriptions");
 
-    // الحصول على البيانات المدخلة
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const phone = document.getElementById('phone').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
+// تخزين البيانات
+let subscriptions = [];
 
-    // التحقق من وجود جميع البيانات
-    if (!firstName || !lastName || !phone || !startDate || !endDate) {
-        alert('يرجى ملء جميع الحقول.');
-        return;
-    }
+// إضافة مشترك جديد
+subscriptionForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    // إضافة المشترك إلى الجدول
-    const table = document.getElementById('subscribersTable').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const phone = document.getElementById("phone").value;
+  const price = document.getElementById("price").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
 
-    const currentDate = new Date();
-    const endSubscriptionDate = new Date(endDate);
-    const subscriptionStatus = endSubscriptionDate < currentDate ? 'منتهية' : 'مفعلة';
+  const newSubscription = {
+    firstName,
+    lastName,
+    phone,
+    price,
+    startDate,
+    endDate,
+  };
 
-    newRow.innerHTML = `
-        <td>${firstName}</td>
-        <td>${lastName}</td>
-        <td>${phone}</td>
-        <td>${startDate}</td>
-        <td>${endDate}</td>
-        <td class="${subscriptionStatus === 'منتهية' ? 'expired' : 'active'}">${subscriptionStatus}</td>
+  subscriptions.push(newSubscription);
+  updateSubscriptions();
+
+  subscriptionForm.reset();
+});
+
+// function updateSubscriptions() {
+  activeSubscriptions.innerHTML = "";
+  expiredSubscriptions.innerHTML = "";
+
+  const today = new Date().toISOString().split("T")[0];
+
+  subscriptions.forEach((sub) => {
+    const subscriptionItem = document.createElement("div");
+    subscriptionItem.classList.add("subscription-item");
+
+    // تفاصيل المشترك
+    subscriptionItem.innerHTML = `
+      <p><strong>الاسم:</strong> ${sub.firstName} ${sub.lastName}</p>
+      <p><strong>رقم الهاتف:</strong> ${sub.phone}</p>
+      <p><strong>السعر:</strong> ${sub.price} دج</p>
+      <p><strong>تاريخ البداية:</strong> ${sub.startDate}</p>
+      <p><strong>تاريخ الانتهاء:</strong> ${sub.endDate}</p>
     `;
-    
-    // مسح الحقول بعد الإضافة
-    document.getElementById('subscriberForm').reset();
-});
 
-document.getElementById('filterExpired').addEventListener('click', function() {
-    const rows = document.querySelectorAll('#subscribersTable tbody tr');
-    
-    rows.forEach(row => {
-        const statusCell = row.cells[5]; // الخلية الخاصة بحالة الاشتراك
-        if (statusCell.textContent === 'مفعلة') {
-            row.style.display = 'none'; // إخفاء المشتركين المفعلة اشتراكاتهم
-        } else {
-            row.style.display = ''; // عرض المشتركين المنتهية اشتراكاتهم
-        }
-    });
-});
+    // إضافة الاشتراك حسب الحالة
+    if (sub.endDate >= today) {
+      activeSubscriptions.appendChild(subscriptionItem);
+    } else {
+      expiredSubscriptions.appendChild(subscriptionItem);
+    }
+  });
+}
