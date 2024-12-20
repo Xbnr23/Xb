@@ -1,0 +1,21 @@
+let db;
+let request = indexedDB.open("MyDatabase", 1);
+
+// يتم تنفيذ هذا الحدث إذا كانت قاعدة البيانات جديدة أو تحتاج ترقية
+request.onupgradeneeded = function (event) {
+    db = event.target.result;
+
+    // إنشاء Object Store إذا لم يكن موجود
+    if (!db.objectStoreNames.contains("MyStore")) {
+        db.createObjectStore("MyStore", { keyPath: "id" }); // استخدام "id" كمفتاح رئيسي
+    }
+};
+
+request.onsuccess = function (event) {
+    db = event.target.result;
+    console.log("تم فتح قاعدة البيانات بنجاح.");
+};
+
+request.onerror = function (event) {
+    console.error("خطأ في فتح قاعدة البيانات:", event.target.errorCode);
+};
